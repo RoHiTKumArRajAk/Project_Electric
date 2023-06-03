@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration Page</title>
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading text-center">
+            <h1>Entry Form</h1>
+          </div>
+          <div class="panel-body">
+            <form action="connect.php" method="post">
+              <div class="form-group">
+                <label for="code">Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="code"
+                  name="code"
+                />
+              </div>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="Dept">Dept</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="dept"
+                        name="dept"
+                    />
+              </div>
+              <div class="form-group">
+                <label for="pbal">Prev Balance</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pbal"
+                  name="pbal"
+                />
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="loc"
+                  name="loc"
+                />
+              </div>
+              <div class="form-group">
+                <label for="lread">Last Reading</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="lread"
+                  name="lread"
+                />
+              </div>
+              <div class="form-group">
+                <label for="mch">Meter Charge</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="mch"
+                  name="mch"
+                />
+              </div>
+              <div class="form-group">
+                <label for="urate">Unit Rate</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="urate"
+                  name="urate"
+                />
+              </div>
+              <div class="form-group">
+                <label for="ldate">Last Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="ldate"
+                  name="ldate"
+                />
+              </div>
+              <div class="form-group">
+                <label for="allocation">Allocation</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="allo"
+                  name="allo"
+                />
+              </div>
+              <div class="form-group">
+                <label for="cpay">Current Payment</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="cpay"
+                  name="cpay"
+                />
+              </div>
+              <div class="form-group">
+                <label for="lpaydate">Last Payment Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="lpaydate"
+                  name="lpaydate"
+                />
+              </div>
+              <input type="submit" class="btn btn-primary" />
+            </form>
+          </div>
+          <div class="panel-footer text-right">
+            <small>&copy; Rohit</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+</div>
+<script>
+    const scriptURL = 'https://script.google.com/u/0/home/projects/1y7oZB1xZCkABa2FavP7AtvJc7wcCo2AMG0h2NMcW_kPjri_M9xOusg_e/edit'
+            const form = document.forms['google-sheet']
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+                .catch(error => console.error('Error!', error.message))
+            })
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </body>
+</html>

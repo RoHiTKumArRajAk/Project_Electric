@@ -1,0 +1,36 @@
+body{
+    margin: 0px 0px;
+    background-color: blanchedalmond;
+}
+
+#tit{
+    color:rgb(142, 140, 140);
+    text-decoration: solid;
+    font-size: 20px;
+    font-style: bold;
+}
+
+a{
+    font-size: 20px;
+    margin-top: 20px;
+    padding : 6px 3px;
+    text-decoration: none;
+    color :rgb(252, 251, 251);
+}
+
+.navbar{
+    background-color: rgb(21, 20, 20);
+}
+.navbar ul{
+    overflow: auto;
+}
+.navbar li{
+    float :left;
+    list-style: none;
+    padding :3px 3px;
+    margin : 14px;
+}
+
+.navbar li a:hover{
+    color : rgb(231, 166, 166);
+}
