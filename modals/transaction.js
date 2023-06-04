@@ -6,11 +6,23 @@ const TransactionSchema = new Schema({
             type:String
       },
       ToDate:{
-            type: Date,
+            type: String,
       },
       CurrentReading:{
             type: Number,
       },
+      CurrentPayment:{
+            type: Number,
+      },
+      CurrentPaymentDate:{
+            type: String,
+      },
+      CurrentCharges:{
+            type: Number,
+      },
+      TotalDues:{
+            type: Number,
+      }
 }) ;
 
 module.exports = mongoose.model('transaction', TransactionSchema)

@@ -28,16 +28,16 @@ const MasterSchema = new Schema({
             type: Number,
       },
       LastDate:{
-            type: Date,
+            type: String,
       },
       Allocation:{
             type: String,
       },
-      CurrentPayment:{
-            type: Number,
-      },
+      // CurrentPayment:{
+      //       type: Number,
+      // },
       LastPaymentDate:{
-            type: Date,
+            type: String,
       },
 }) ;
 
