@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Master = require("./modals/master");
 const Transaction = require("./modals/transaction");
+const master = require("./modals/master");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -13,8 +14,14 @@ app.use(express.static("public"));
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://127.0.0.1:27017/electric");
 
-app.get("/", function (req, res) {
-  res.render("index");
+//get requests
+app.get("/", async function (req, res) {
+
+  const masterdocs = await Master.find({}) ;
+  const transactiondocs = await Transaction.find({}) ;
+  console.log(masterdocs);
+  console.log(transactiondocs);
+  res.render("index", {master:masterdocs, transaction:transactiondocs});
 });
 app.get("/FirstForm", function (req, res) {
   res.render("form1");
@@ -22,6 +29,37 @@ app.get("/FirstForm", function (req, res) {
 app.get("/SecondForm", function (req, res) {
   res.render("form2");
 });
+
+app.get('/ShowPage', async function(req, res){
+      const masterdocs = await Master.find({}) ;
+      const transactiondocs = await Transaction.find({}) ;
+      // const findCode = await Master.find({}) ;
+      const updatedVals = [] ;
+      
+      for(let i=0;i<masterdocs.length;++i)
+      {
+            let el = masterdocs[i] ;
+            const code = el.Code;
+            // console.log(code);
+            const transactioncode = await Transaction.find({Code:code}) ;
+            const updatedVal = {} ;
+            updatedVal.Code = code ;
+            updatedVal.date = transactioncode[0].ToDate;
+            updatedVal.PrevBalance = el.PrevBalance ;
+            updatedVal.CurrentCharges = (transactioncode[0].CurrentReading - el.LastReading) * el.UnitRate + el.MeterCharge ;
+            updatedVal.TotalDue = updatedVal.PrevBalance+updatedVal.CurrentCharges ;
+            console.log(transactioncode);
+            console.log(transactioncode[0].Code);
+            console.log(el.LastReading);
+            console.log(el.UnitRate);
+            console.log(el.MeterCharge);
+
+            updatedVals.push(updatedVal) ;
+      }
+      // console.log('funck');
+      console.log(updatedVals);
+      res.render('showpage', {values:updatedVals}) ;
+}) ;
 
 //post
 app.post("/FirstForm", async function (req, res) {
@@ -31,7 +69,7 @@ app.post("/FirstForm", async function (req, res) {
       Code,
       Name,
       Dept,
-      PrevBal,
+      PrevBalance,
       Location,
       LastReading,
       MeterCharge,
@@ -45,7 +83,7 @@ app.post("/FirstForm", async function (req, res) {
       Code,
       Name,
       Dept,
-      PrevBal,
+      PrevBalance,
       Location,
       LastReading,
       MeterCharge,
@@ -56,8 +94,8 @@ app.post("/FirstForm", async function (req, res) {
       LastPaymentDate,
     });
     const saveMaster = await newFile.save();
-    console.log(saveMaster);
-    res.render("index");
+//     console.log(saveMaster);
+    res.redirect("/");
   } catch (error) {
       console.error(error.message);
   }
@@ -72,8 +110,9 @@ app.post('/SecondForm', async function(req, res){
                   CurrentReading,
             }) ;
             const saveTransaction = await NewTransaction.save() ;
-            console.log(saveTransaction);
-            res.render('index') ;
+            // console.log(saveTransaction);
+            res.redirect('/') ;
+            
 
       }catch(error){
             console.error(error.message);

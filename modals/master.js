@@ -34,7 +34,7 @@ const MasterSchema = new Schema({
             type: String,
       },
       CurrentPayment:{
-            type: Date,
+            type: Number,
       },
       LastPaymentDate:{
             type: Date,
